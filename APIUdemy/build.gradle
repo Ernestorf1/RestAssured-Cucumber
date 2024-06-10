@@ -1,0 +1,44 @@
+plugins {
+    id("java")
+}
+
+group = "Out Of the Box"
+version = "1.0-SNAPSHOT"
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
+    // https://mvnrepository.com/artifact/io.cucumber/cucumber-java
+    implementation 'io.cucumber:cucumber-java:7.16.1'
+    // https://mvnrepository.com/artifact/io.cucumber/cucumber-junit
+testImplementation 'io.cucumber:cucumber-junit:7.16.1'
+
+    // https://mvnrepository.com/artifact/tech.grasshopper/extentreports-cucumber7-adapter
+    implementation 'tech.grasshopper:extentreports-cucumber7-adapter:1.10.1'
+    // to manipulate jsons
+    implementation group: 'org.json', name: 'json', version: '20180813'
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
+    // https://mvnrepository.com/artifact/org.junit/junit-bom
+   testImplementation platform('org.junit:junit-bom:5.10.2')
+   testImplementation('org.junit.jupiter:junit-jupiter')
+   // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
+testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
+
+
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+tasks.named('test') {
+    systemProperty "cucumber.options", System.getProperty("cucumber.options")
+}
